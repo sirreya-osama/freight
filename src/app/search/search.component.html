@@ -1,0 +1,117 @@
+<div class="row pb-5">
+    <div class="col-lg-12">
+        <form [formGroup]="searchForm" class="form-row align-items-center justify-content-between search-mobile">
+
+            <div class="d-flex justify-between-mobile">
+                <div class="form-group">
+                    <label class="custom-checkbox mb-0 pr-3">
+                        <input type="checkbox" name="sea" id="sea" formControlName="sea" value="sea" checked />
+                        <span>
+                            <fa-icon [icon]="faShip"></fa-icon>Sea
+                        </span>
+                    </label>
+                </div>
+    
+                <div class="form-group">
+                    <label class="custom-checkbox mb-0 pr-3">
+                        <input type="checkbox" name="air" id="air" formControlName="air" value="air" />
+                        <span>
+                            <fa-icon [icon]="faPlane"></fa-icon>Air
+                        </span>
+                    </label>
+                </div>
+    
+                <div class="form-group">
+                    <label class="custom-checkbox mb-0">
+                        <input type="checkbox" name="land" id="land" formControlName="land" value="land" />
+                        <span>
+                            <fa-icon [icon]="faShippingFast"></fa-icon>Land
+                        </span>
+                    </label>
+                </div>
+            </div>
+            
+
+            <div class="form-group">
+                <div class="input-group">
+                    <input id="origin" type="text" class="form-control" [ngbTypeahead]="searchOriginCountry" [editable]="false"
+                        formControlName="originCountry" placeholder="Origin" aria-label="Origin" role="list" />
+                    <div class="input-group-append">
+                        <span class="input-group-text" >
+                            <fa-icon [icon]="faPlaneDeparture"></fa-icon>
+                        </span>
+                    </div>
+                    <small class="input-help text-muted" *ngIf="!notValidControl('required', 'originCountry')">please
+                        type "China"</small>
+                    <small class="input-help not-valid" *ngIf="notValidControl('required', 'originCountry')">
+                        Origin country is required
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <input id="destination" type="text" class="form-control" [ngbTypeahead]="searchDestinationCountry"  [editable]="false"
+                        formControlName="destinationCountry" placeholder="Destination"  aria-label="Destination" role="list" />
+                    <div class="input-group-append">
+                        <span class="input-group-text" >
+                            <fa-icon [icon]="faPlaneArrival"></fa-icon>
+                        </span>
+                    </div>
+                    <small class="input-help text-muted"
+                        *ngIf="!notValidControl('required', 'destinationCountry')">please type "Indonesia"</small>
+                    <small class="input-help not-valid" *ngIf="notValidControl('required', 'destinationCountry')">
+                        Destination country is required
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                <div class="input-group">
+                    <input class="form-control" placeholder="Pickup Date" name="dp" ngbDatepicker #d="ngbDatepicker"
+                        formControlName="pickupDate" readonly (click)="d.toggle()" aria-label="Pickup Date"  />
+                    <div class="input-group-append">
+                        <span class="input-group-text" >
+                            <fa-icon [icon]="faCalendarWeek"></fa-icon>
+                        </span>
+                    </div>
+                    <small class="input-help text-muted" *ngIf="!notValidControl('required', 'pickupDate')">please
+                        choose "20-2-2021"</small>
+                    <small class="input-help not-valid" *ngIf="notValidControl('required', 'pickupDate')">
+                        Pickup Date is required
+                    </small>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-padding btn-mobile" (click)="save()"
+                    [disabled]="searchForm.invalid">
+                    
+                    <span *ngIf="!loading">Search</span>
+                    <span *ngIf="loading">Loading...</span>
+                </button>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+
+
+        <app-splash [loading]="loading" [splash]="splash" *ngIf="loading || splash"></app-splash>
+
+        <app-search-result *ngIf="searchResult" [searchResult]="searchResult" [loading]="loading" [total]="total">
+        </app-search-result>
+
+        <div class=" text-center py-3">
+            <button type="button" class="btn btn-white" (click)="loadMore()"
+                *ngIf="!lastResultPage && searchResult && total > 3">Load more</button>
+        </div>
+
+    </div>
+</div>

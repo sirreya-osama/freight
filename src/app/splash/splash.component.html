@@ -1,0 +1,25 @@
+<div class="card app-card">
+
+    <div class="card-body text-center">
+
+        <div class="col-lg-8 offset-lg-2">
+
+            <div *ngIf="splash">
+                <img class="splash py-5" src="./assets/splash.svg"  alt="splash" />
+                <h4 class="card-title">Book Freight Quotes Online</h4>
+                <p class="card-text">To book freight quotes online, please choose the freight mode, origin country,
+                    destination country, the pickup date and click<strong>"Search"</strong> </p>
+            </div>
+
+            <div *ngIf="loading">
+                <img class="splash py-5" src="./assets/splash.svg"  alt="splash"/>
+                <h4 class="card-title py-1">Searching</h4>
+                <p class="card-text">please wait... </p>
+                <div class="spinner-border" role="status"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

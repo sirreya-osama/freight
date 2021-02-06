@@ -1,0 +1,90 @@
+<div *ngIf="total != 0">
+
+    <div class="card app-card">
+        <div class="card-body text-center">
+            <div class="row">
+                <div class="col-lg-4 d-flex flex-row justify-content-between align-items-center flex-column-mobile">
+                    <h4 class="py-1 flex-1 text-left">Filter By:</h4>
+                    <select class="select-control flex-1" placement="top" ngbTooltip="Coming Soon">
+                        <option>Sea</option>
+                        <option>Air</option>
+                        <option>Land</option>
+                    </select>
+                </div>
+                <div class="col-lg-8 d-flex flex-row justify-content-between align-items-center flex-column-mobile">
+                    <h4 class="py-1">Sort By:</h4>
+                    <button type="button" class="btn btn-light btn-mobile  p-3" placement="top"
+                        ngbTooltip="Coming Soon">Price <fa-icon [icon]="faSortAmountDown"></fa-icon></button>
+                    <button type="button" class="btn btn-light btn-mobile p-3" placement="top"
+                        ngbTooltip="Coming Soon">Duration <fa-icon [icon]="faSortAmountUp"></fa-icon>
+                    </button>
+                    <button type="button" class="btn btn-light btn-mobile p-3" placement="top"
+                        ngbTooltip="Coming Soon">ETA</button>
+                    <button type="button" class="btn btn-link btn-mobile p-3" placement="top"
+                        ngbTooltip="Coming Soon">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card app-card" *ngFor="let result of searchResult,  index as i">
+        <div class="card-body">
+            <div class="d-flex flex-row justify-content-center align-items-center pt-3 flex-column-mobile">
+                <div class="d-flex flex-column flex-4 flex-column-mobile">
+                    <h4 class="card-title-icon pb-3">
+                        <fa-icon [icon]="faShip" *ngIf="result.mode == 'sea'" placement="top"
+                        ngbTooltip="Sea"></fa-icon>
+                        <fa-icon [icon]="faPlane" *ngIf="result.mode == 'air'" placement="top"
+                        ngbTooltip="Air"></fa-icon>
+                        <fa-icon [icon]="faShippingFast" *ngIf="result.mode == 'land'" placement="top"
+                        ngbTooltip="Land"></fa-icon>
+                        {{ result.freight_name }}
+                    </h4>
+                    <div class="d-flex flex-row col-lg-6 pr-0 pl-0 justify-content-between flex-column-mobile">
+                        <p class="card-text-icon">
+                            <fa-icon [icon]="faPlaneDeparture"></fa-icon> <small>Origin : </small>{{ result.origin }}
+                        </p>
+                        <p class="card-text-icon">To</p>
+                        <p class="card-text-icon">
+                            <fa-icon [icon]="faPlaneArrival"></fa-icon> <small>Destination : </small>{{
+                            result.destination }}
+                        </p>
+                    </div>
+                    <div class="d-flex flex-row col-lg-8 pr-0 pl-0 justify-content-between flex-column-mobile">
+                        <p class="card-text-icon">
+                            <fa-icon [icon]="faClock"></fa-icon> <small>Duration : </small>{{ result.duration }} Days
+                        </p>
+                        <p class="card-text-icon">
+                            <fa-icon [icon]="faCalendarWeek"></fa-icon> <small>ETD : </small>{{ result.etd }}
+                        </p>
+                        <p class="card-text-icon">
+                            <fa-icon [icon]="faCalendarWeek"></fa-icon> <small>ETA : </small>{{ result.eta }}
+                        </p>
+                        <p class="card-text-icon">
+                            <fa-icon [icon]="faCalendarWeek"></fa-icon> <small>Pickup Date : </small>{{
+                            result.pickup_date }}
+                        </p>
+                    </div>
+                </div>
+                <div class="d-flex flex-column justify-content-center align-items-center flex-1 flex-column-mobile">
+                    <h3 class="price">{{ result.price }}$</h3>
+                    <button type="button" class="btn btn-primary" placement="top" ngbTooltip="Coming Soon">Book</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="card app-card" *ngIf="total == 0 && !loading">
+    <div class="card-body text-center">
+        <div class="col-lg-8 offset-lg-2">
+            <div>
+                <img class="splash py-5" src="./assets/splash.svg" alt="splash" />
+                <h4 class="card-title">No results found</h4>
+                <p class="card-text">please modify the search criteria and click<strong>"Search"</strong> </p>
+            </div>
+        </div>
+    </div>
+</div>

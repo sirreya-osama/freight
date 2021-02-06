@@ -1,0 +1,7 @@
+@charset "UTF-8";
+// normalize
+@import "./assets/sass/normalize.scss";
+// Bootstrap
+@import "~bootstrap/scss/bootstrap.scss";
+// scss files without 7-1 pattern for the rush
+@import "./assets/sass/style.scss";
